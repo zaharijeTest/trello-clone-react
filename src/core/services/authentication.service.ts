@@ -1,6 +1,4 @@
-// import { store } from '../../index';
 import { TrelloService } from "../api/trello.service";
-import { ACTIONS } from '../store/actions';
 import { StorageService, STORAGE_KEYS } from "./storage.service";
 
 export class AuthenticationService {

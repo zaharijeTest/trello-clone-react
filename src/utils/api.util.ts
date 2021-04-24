@@ -1,8 +1,3 @@
-import { APP_LOCATIONS } from '../config/constants';
-import { AuthenticationComponent } from '../modules/authentication/authenticate.component';
-import { MainComponent } from '../modules/main/main.component';
-
-
 export const createQueryParams = (obj) => {
   const queryParams = new URLSearchParams(obj);
   queryParams.forEach((value, key) => {
@@ -14,13 +9,12 @@ export const createQueryParams = (obj) => {
 };
 
 
-export const parseResponse = (responsePromise) =>
-  new Promise((resolve, reject) => {
+export const parseResponse = <T>(responsePromise) =>
+  new Promise<T>((resolve, reject) => {
     responsePromise
       .then((response) => {
         if (response.status === 401) {
           alert('Invalid Token');
-          MainComponent.setPage(AuthenticationComponent, APP_LOCATIONS.AUTH);
         }
         return response.json();
       })

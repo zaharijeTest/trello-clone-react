@@ -1,4 +1,4 @@
-import { createQueryParams, parseResponse } from '../../utils/api.util';
+import { createQueryParams, parseResponse } from "../../utils/api.util";
 import { StorageService, STORAGE_KEYS } from "../services/storage.service";
 import { TRELLO_ENDPOINTS } from "./api-endpoints";
 
@@ -25,7 +25,7 @@ export class TrelloService {
   }
 
   getUserInfo(token = this.token) {
-    return parseResponse(fetch(TRELLO_ENDPOINTS.getUserInfo(token)));
+    return parseResponse<any>(fetch(TRELLO_ENDPOINTS.getUserInfo(token)));
   }
 
   getBoards() {
