@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { IUser } from "../../@types/user";
@@ -34,4 +34,5 @@ const mapStateToProps = (state): ILoginPageProps => {
       user
     }
   }
+
   export default connect(mapStateToProps)(LoginPage);

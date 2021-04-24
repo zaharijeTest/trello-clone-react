@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import {
   BrowserRouter as Router, Route,
 } from "react-router-dom";
@@ -7,27 +7,30 @@ import { Footer } from './pages/footer/footer';
 import { Header } from './pages/header/header';
 import LoginPage from './pages/login/login';
 import { ProtectedRoute } from './shared/components/protected-route/protected-route';
-import { store } from './core/store/main';
-import { ACTIONS } from './core/store/actions';
+import { getUser } from './core/store/user/actions';
 import { IUser } from './@types/user';
-import './core/store/main';
+import './core/store/store';
 import './App.css';
+import { IStore } from './@types/store';
+import BoardsListPage  from './pages/boards-list/boards-list';
 
 interface IAppProps {
-  user: IUser;
+  user?: IUser | null;
+  getUser?: any;
 }
-const App:FunctionComponent<IAppProps> = (props) => {
-  useEffect(() => {
-    store.dispatch({ type: ACTIONS.USER_ACTIONS.GET_USER });
-  },[]);
 
+const App:FunctionComponent<IAppProps> = ({getUser, user}) => {
+  useEffect(() => {
+    getUser();
+  },[]);
+  const isAuthenticated = !!user?.id
   return (
       <div className="container">
         <Header></Header>
         <Router>
           <Route exact path="/about"> <span>About</span></Route>
           <Route exact path="/login" component={LoginPage}></Route>
-          <ProtectedRoute isAuthenticated={!!props.user?.id} path={['/home']} >  <span>Home</span> </ProtectedRoute>
+          <ProtectedRoute isAuthenticated={isAuthenticated} path={['/home']} Component={BoardsListPage}> </ProtectedRoute>
           <Route path="/" component={LoginPage}></Route>
         </Router>
         <Footer></Footer>
@@ -35,10 +38,14 @@ const App:FunctionComponent<IAppProps> = (props) => {
   );
 }
 
-const mapStateToProps = (state): IAppProps => {
-  const { user } = state;
+const mapStateToProps = (store: IStore): IAppProps => {
+  const { user } = store;
   return {
     user
   }
 }
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = {
+  getUser
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
