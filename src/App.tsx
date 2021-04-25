@@ -11,41 +11,44 @@ import { getUser } from './core/store/user/actions';
 import { IUser } from './@types/user';
 import './core/store/store';
 import './App.css';
-import { IStore } from './@types/store';
-import BoardsListPage  from './pages/boards-list/boards-list';
+import { IDispatch, IMapToProps, INullable, IStore } from './@types/store';
+import BoardsListPage from './pages/boards-list/boards-list';
 
-interface IAppProps {
-  user?: IUser | null;
-  getUser?: any;
+interface IAppStateProps {
+  user: INullable<IUser>;
 }
 
-const App:FunctionComponent<IAppProps> = ({getUser, user}) => {
+interface IAppDispatchProps {
+  getUser: IDispatch;
+}
+
+interface IAppProps extends IAppStateProps, IAppDispatchProps{}
+
+const App: FunctionComponent<IAppProps> = ({ getUser, user }) => {
   useEffect(() => {
     getUser();
-  },[]);
+  }, [getUser]);
+
   const isAuthenticated = !!user?.id
+
   return (
-      <div className="container">
-        <Header></Header>
+    <div className="container">
+      <Header></Header>
         <Router>
           <Route exact path="/about"> <span>About</span></Route>
           <Route exact path="/login" component={LoginPage}></Route>
-          <ProtectedRoute isAuthenticated={isAuthenticated} path={['/home']} Component={BoardsListPage}> </ProtectedRoute>
+          <ProtectedRoute isAuthenticated={isAuthenticated} path={['/boards/:boardId']}> SPECIFIC BOARD </ProtectedRoute>
+          <ProtectedRoute isAuthenticated={isAuthenticated} path={['/boards']} Component={BoardsListPage}> </ProtectedRoute>
           <Route path="/" component={LoginPage}></Route>
         </Router>
-        <Footer></Footer>
-      </div>
+      <Footer></Footer>
+    </div>
   );
 }
 
-const mapStateToProps = (store: IStore): IAppProps => {
-  const { user } = store;
-  return {
-    user
-  }
-}
+const mapProps: IMapToProps<IAppStateProps,IAppDispatchProps> = [
+  (store: IStore) => ({user: store.user}),
+  {getUser}
+]
 
-const mapDispatchToProps = {
-  getUser
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(...mapProps)(App);

@@ -1,12 +1,13 @@
 import { FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
+import { IMapToProps, INullable, IStore } from "../../@types/store";
 import { IUser } from "../../@types/user";
 import { AuthenticationService } from "../../core/services/authentication.service";
 import { Button } from "../../shared/components/button/button";
 
-interface ILoginPageProps {
-    user: IUser;
+interface ILoginPageStateProps {
+    user: INullable<IUser>;
 }
 const authenticationService = new AuthenticationService();
 
@@ -14,9 +15,9 @@ const login = () => {
     authenticationService.login();
 }
 
-const LoginPage: FunctionComponent<ILoginPageProps> = ({ user }) => {
-    if(user?.id) {
-        return <Redirect to="/home"></Redirect>
+const LoginPage: FunctionComponent<ILoginPageStateProps> = ({ user }) => {
+    if (user?.id) {
+        return <Redirect to="/boards"></Redirect>
     }
     return (
         <div className="authentication-wrapper">
@@ -28,11 +29,10 @@ const LoginPage: FunctionComponent<ILoginPageProps> = ({ user }) => {
     )
 }
 
-const mapStateToProps = (state): ILoginPageProps => {
-    const { user } = state;
-    return {
-      user
-    }
-  }
+const mapProps: IMapToProps<ILoginPageStateProps> = [
+    (store: IStore) => ({ user: store.user }),
+    {}
+]
 
-  export default connect(mapStateToProps)(LoginPage);
+
+export default connect(...mapProps)(LoginPage);

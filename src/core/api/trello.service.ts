@@ -1,3 +1,4 @@
+import { IBoard } from "../../@types/board";
 import { createQueryParams, parseResponse } from "../../utils/api.util";
 import { StorageService, STORAGE_KEYS } from "../services/storage.service";
 import { TRELLO_ENDPOINTS } from "./api-endpoints";
@@ -29,7 +30,7 @@ export class TrelloService {
   }
 
   getBoards() {
-    return parseResponse(
+    return parseResponse<IBoard[]>(
       fetch(TRELLO_ENDPOINTS.getBoards(this.username, this.token))
     );
   }

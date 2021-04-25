@@ -1,36 +1,56 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { IBoard } from "../../@types/board";
-import { IStore } from "../../@types/store";
-import { getBoards }  from '../../core/store/board/actions';
+import { IDispatch, IMapToProps, IStore } from "../../@types/store";
+import { getBoards } from '../../core/store/board/actions';
+import { useHistory } from 'react-router-dom';
 
-interface IBoardProps {
+interface IBoardsListStateProps {
     boards: IBoard[];
-    getBoards?: any;
 }
-const BoardsListPage = ({getBoards, boards}:IBoardProps) => {
 
+interface IBoardsListDispatchProps {
+    getBoards: IDispatch;
+}
+
+interface IBoardListProps extends IBoardsListStateProps, IBoardsListDispatchProps { }
+
+const goToBoard = (history: any, board: IBoard) => {
+    history.push({ pathname: `boards/${board.id}` });
+}
+
+const BoardsListPage = ({ getBoards, boards }: IBoardListProps) => {
+    const history = useHistory();
     useEffect(() => {
         getBoards();
-    },[]);
+    }, [getBoards]);
 
     return (
-    <div>
-        {boards.map(board => (
-            <div key={board.id}>{board.name}</div>
-        ))}
-    </div>
-)};
+        <div className="boards-list">
+            {boards.map(board => (
+                <div
+                    className="board-tile"
+                    style={{
+                        background: board.prefs.backgroundImage ? `url(${board.prefs.backgroundImage})`: board.prefs.backgroundColor,
+                    }}
+                    key={board.id}
+                    onClick={() => goToBoard(history, board)}
+                >
+                    {board.name}
+                </div>
+            ))}
+            <div className="board-tile">Create New Board</div>
+        </div>
+    )
+};
+
+
+const mapProps: IMapToProps<IBoardsListStateProps, IBoardsListDispatchProps> = [
+    (store: IStore) => ({ boards: store.boards }),
+    { getBoards }
+]
 
 
 
-const mapStateToProps = (store:IStore):IBoardProps => ({
-    boards: store.boards
-});
-
-const mapDispatchToProps = {
-    getBoards
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BoardsListPage);
+export default connect(...mapProps)(BoardsListPage);
 
