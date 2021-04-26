@@ -1,0 +1,15 @@
+.new-board-wrapper {
+    width: 400px;
+}
+
+.new-board-title-wrapper {
+    margin-right: 10px;
+}
+
+.color-chooser-wrapper {
+    width: 90px;
+}
+
+.new-board-info-wrapper {
+    margin: 10px 0px;
+}

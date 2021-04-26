@@ -1,9 +1,11 @@
-import { IBoard } from "./board";
+import { IBoard, INewBoard } from "./board";
 import { IUser } from "./user";
 
 export interface IStore {
     user: INullable<IUser>
     boards: IBoard[]
+    selectedBoard: INullable<IBoard>
+    newBoard: INullable<INewBoard>
 }
 
 export type INullable<T> = T | null | undefined 

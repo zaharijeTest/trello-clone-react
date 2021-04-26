@@ -16,7 +16,6 @@ export class AuthenticationService {
 
   logout() {
     this.storageService.delete(STORAGE_KEYS.USER);
-    // store.dispatch({type: ACTIONS.USER_LOGOUT, data: null, })
   }
 
   isAuthenticated() {

@@ -1,0 +1,32 @@
+.modal-wrapper {
+    display: none;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.64);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background-color: transparent;
+    position: relative;
+    padding: 2rem 1rem 2rem 2rem;
+    border-radius: var(--radius);
+  }
+  
+  .modal-close {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    cursor: pointer;
+  }
+  
+  .modal-content {
+    height: 100%;
+    overflow-y: auto;
+  }

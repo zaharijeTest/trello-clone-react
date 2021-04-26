@@ -13,3 +13,8 @@ export interface IBoard {
         backgroundImage: string;
     }
 }
+
+export interface INewBoard {
+    name?: string;
+    backgroundColor?: string;
+}

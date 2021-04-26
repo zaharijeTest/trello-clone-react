@@ -7,7 +7,7 @@ import { AuthenticationService } from "../../core/services/authentication.servic
 import { Button } from "../../shared/components/button/button";
 
 interface ILoginPageStateProps {
-    user: INullable<IUser>;
+    user?: INullable<IUser>;
 }
 const authenticationService = new AuthenticationService();
 

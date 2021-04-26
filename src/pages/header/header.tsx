@@ -4,7 +4,7 @@ export const Header = () => (
 <header>
     <div>
         <span>Trello </span>
-        {/* <AppLogo className="app-logo"></AppLogo> */}
+        <AppLogo className="app-logo"></AppLogo>
     </div>
     <div className="logout-button"></div>
 </header>

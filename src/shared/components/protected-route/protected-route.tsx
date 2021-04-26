@@ -3,17 +3,18 @@ import { Redirect, Route } from "react-router";
 
 interface IProtectedRouteProps {
     isAuthenticated: boolean, 
-    Component?: any, 
+    component?: any, 
     path: string | string[],
     exact?: boolean;
 }
 
-export const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = (props) => {
+export const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({component, children, path, isAuthenticated}) => {
+    const Page = component as  keyof JSX.IntrinsicElements
     return (
-        <Route exact path={props.path} 
+        <Route exact path={path} 
             render = {() => {
-                if(props.isAuthenticated) {
-                    return props.Component ? <props.Component></props.Component> : props.children
+                if(isAuthenticated) {
+                    return component ? <Page></Page> : children
                 } else {
                     return <Redirect to="/login"></Redirect>
                 }

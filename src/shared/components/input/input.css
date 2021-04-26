@@ -1,0 +1,28 @@
+.input-text {
+    background: transparent;
+    border-radius: var(--radius);
+    box-shadow: none;
+    line-height: 2.4rem;
+    resize: none;
+    width: 100%;
+    border: unset;
+    overflow: hidden;
+    border-radius: 3px;
+    transition-property: background-color,border-color,box-shadow;
+    transition-duration: 85ms;
+    transition-timing-function: ease;
+  }
+  
+  .input-text:focus {
+    outline: 0;
+    background-color: hsla(0,0%,100%,.3)!important;;
+  }
+
+  .input-text:hover {
+    background-color: hsla(0,0%,100%,.15)!important;
+    ;
+  }
+
+  .input-text::placeholder {
+    color: white;
+  }

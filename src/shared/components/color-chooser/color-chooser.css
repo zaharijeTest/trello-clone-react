@@ -1,0 +1,14 @@
+.color-chooser-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color-tile {
+    margin: 5px;
+    height: 20px;
+    width: 20px;
+}
+
+.selected-color {
+    border: solid 1px black;
+}

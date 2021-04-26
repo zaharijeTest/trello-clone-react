@@ -1,9 +1,11 @@
 import { IStore } from "../../@types/store";
 import { ACTIONS } from "./actions";
 
-const initialState:IStore = {
+const initialState: IStore = {
   boards: [],
-  user: null
+  user: undefined,
+  selectedBoard: null,
+  newBoard: null
 }
 export const reducers = (state = initialState, action: { type: any; data: any; }) => {
   switch (action.type) {
@@ -11,6 +13,10 @@ export const reducers = (state = initialState, action: { type: any; data: any; }
       return {...state, user: action.data};
     case ACTIONS.BOARD_ACTIONS.BOARDS:
       return {...state, boards: action.data};
+    case ACTIONS.BOARD_ACTIONS.SELECT_BOARD:
+      return {...state, selectedBoard: action.data};
+      case ACTIONS.BOARD_ACTIONS.CREATE_BOARD:
+        return {...state, newBoard: action.data};
     default:
       return state;
   }
