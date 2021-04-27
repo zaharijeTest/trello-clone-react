@@ -7,6 +7,10 @@
     width: fit-content;
     cursor: pointer;
     background-color: var(--btn-cl);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .button-wrapper:hover {

@@ -11,6 +11,9 @@
     transition-property: background-color,border-color,box-shadow;
     transition-duration: 85ms;
     transition-timing-function: ease;
+    color: white;
+    padding-left: 5px;
+    height: 3.2rem;
   }
   
   .input-text:focus {
@@ -25,4 +28,5 @@
 
   .input-text::placeholder {
     color: white;
+    padding-left: 5px;
   }

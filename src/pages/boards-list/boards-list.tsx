@@ -5,10 +5,11 @@ import { IDispatch, IMapToProps, INullable, IStore } from "../../@types/store";
 import { getBoardsAction, selectBoardAction, createBoardAction } from '../../core/store/board/actions';
 import { useHistory } from 'react-router-dom';
 import { Modal } from "../../shared/components/modal/modal.component";
-import './boards-list.css';
 import { IUser } from "../../@types/user";
 import NewBoard from './components/new-board/new-board';
 import { BoardModel } from "../../models/board.model";
+import './boards-list.css';
+import { MenuList } from "../../shared/components/menu-list/menu-list";
 
 interface IBoardsListStateProps {
     boards: BoardModel[];
@@ -27,6 +28,11 @@ const goToBoard = (history: any, board: IBoard) => {
     history.push({ pathname: `boards/${board.id}` });
 }
 
+const MENU_ITEMS = [
+    { icon: '', text: 'Boards' },
+    { icon: '', text: 'Templates' },
+    { icon: '', text: 'Home' }
+]
 const BoardsListPage = ({ getBoardsAction, boards, user, selectBoardAction, createBoardAction }: IBoardListProps) => {
     const [modal, setModal] = useState(false);
     const history = useHistory();
@@ -35,31 +41,34 @@ const BoardsListPage = ({ getBoardsAction, boards, user, selectBoardAction, crea
     }, [getBoardsAction, user]);
 
     return (
-        <div className="boards-list">
-            {boards.map(board => (
-                <div
-                    className="board-tile"
-                    style={{
-                        background: board.getBackground()
-                    }}
-                    key={board.id}
-                    onClick={() => {
-                        selectBoardAction(board);
-                        goToBoard(history, board);
-                    }}
-                >
-                    {board.name}
-                </div>
-            ))}
-            <div className="board-tile" onClick={() => {
-                setModal(true)
-            }}>Create New Board</div>
-            {modal &&
-                <Modal onCloseClicked={() => setModal(false)}>
-                    <NewBoard user={user} boards={boards} onSubmit={(newBoard) => { createBoardAction(newBoard); setModal(false) }}></NewBoard>
-                </Modal>
-            }
+        <div className="boards-list-wrapper">
+            <MenuList items={MENU_ITEMS}></MenuList>
 
+            <div className="boards-list">
+                {boards.map(board => (
+                    <div
+                        className="board-tile"
+                        style={{
+                            background: board.getBackground()
+                        }}
+                        key={board.id}
+                        onClick={() => {
+                            selectBoardAction(board);
+                            goToBoard(history, board);
+                        }}
+                    >
+                        {board.name}
+                    </div>
+                ))}
+                <div className="board-tile" onClick={() => {
+                    setModal(true)
+                }}>Create New Board</div>
+                {modal &&
+                    <Modal onCloseClicked={() => setModal(false)}>
+                        <NewBoard user={user} boards={boards} onSubmit={(newBoard) => { createBoardAction(newBoard); setModal(false) }}></NewBoard>
+                    </Modal>
+                }
+            </div>
         </div>
     )
 };

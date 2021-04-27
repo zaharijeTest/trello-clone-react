@@ -64,32 +64,6 @@
     flex-direction: column;
   }
   
-  header {
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    background-color: #026aa7;
-  }
-  
-  header div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: auto;
-  }
-  
-  header span {
-    font-size: 25px;
-    color: white;
-    margin-right: 10px;
-  
-  }
-  
-  .header-app-icon {
-    height: 35px;
-  }
-  
   main {
     height: 95vh;
     overflow-y: auto;

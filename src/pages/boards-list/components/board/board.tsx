@@ -2,7 +2,6 @@ import { FunctionComponent, useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
 import { IDispatch, IMapToProps, INullable, IStore } from "../../../../@types/store";
-import { COLORS } from "../../../../config/colors";
 import { getBoardAction } from '../../../../core/store/board/actions';
 import { BoardModel } from "../../../../models/board.model";
 import { Button } from "../../../../shared/components/button/button";
@@ -31,7 +30,7 @@ const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
     return (
         <div style={{ background: board?.getBackground() }}>
             <div className="board-header">
-                <Button color={COLORS.GRAY}><span>{board?.name}</span></Button>
+                <Button transparent={true} ><span className="bold">{board?.name}</span></Button>
             </div>
             <div className="lists-wrapper">
                 {board?.lists && board.lists.map(boardList => (

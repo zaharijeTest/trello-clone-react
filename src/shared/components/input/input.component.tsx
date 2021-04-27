@@ -1,4 +1,4 @@
-import {  ChangeEvent, CSSProperties, FunctionComponent } from 'react';
+import { ChangeEvent, CSSProperties, FunctionComponent } from 'react';
 import './input.css';
 
 interface IInputProps {
@@ -8,12 +8,11 @@ interface IInputProps {
   onChanged?: (event: ChangeEvent<HTMLInputElement>) => any
 }
 
-export const Input:FunctionComponent<IInputProps> = ({label, placeholder, style, onChanged}) => {
+export const Input: FunctionComponent<IInputProps> = ({ label, placeholder, style, onChanged }) => {
   return (
     <div className="input-wrapper">
       <label>{label}</label>
-      <input className="input-text" placeholder={placeholder} style={style} onChange={onChanged}/>
+      <input className="input-text" placeholder={placeholder} style={style} onChange={onChanged} />
     </div>
-
   )
 }

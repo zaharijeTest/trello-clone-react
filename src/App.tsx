@@ -23,7 +23,7 @@ interface IAppDispatchProps {
   getUserAction: IDispatch;
 }
 
-interface IAppProps extends IAppStateProps, IAppDispatchProps{}
+interface IAppProps extends IAppStateProps, IAppDispatchProps { }
 
 const App: FunctionComponent<IAppProps> = ({ getUserAction, user }) => {
   useEffect(() => {
@@ -33,29 +33,29 @@ const App: FunctionComponent<IAppProps> = ({ getUserAction, user }) => {
   const isAuthenticated = !!user?.id
   return (
     <div className="container">
-      <Header></Header>
-      {user !== undefined && 
-      <Router>
-        <Switch>
-          {ROUTES.map((route, index) => {
-            if(route.protected) {
-              return <ProtectedRoute isAuthenticated={isAuthenticated} path={route.path} component={route.component} key={index}></ProtectedRoute>
+      {user !== undefined &&
+        <Router>
+          <Header></Header>
+          <Switch>
+            {ROUTES.map((route, index) => {
+              if (route.protected) {
+                return <ProtectedRoute isAuthenticated={isAuthenticated} path={route.path} component={route.component} key={index}></ProtectedRoute>
+              }
+              return <Route exact path={route.path} component={route.component} key={index}></Route>
+            })
             }
-            return <Route exact path={route.path} component={route.component} key={index}></Route>
-          })
-          }
-          <Route exact component={NotFound}></Route>
-        </Switch>
+            <Route exact component={NotFound}></Route>
+          </Switch>
         </Router>
-        }
+      }
       <Footer></Footer>
     </div>
   );
 }
 
-const mapProps: IMapToProps<IAppStateProps,IAppDispatchProps> = [
-  (store: IStore) => ({user: store.userStore.user}),
-  {getUserAction}
+const mapProps: IMapToProps<IAppStateProps, IAppDispatchProps> = [
+  (store: IStore) => ({ user: store.userStore.user }),
+  { getUserAction }
 ]
 
 export default connect(...mapProps)(App);

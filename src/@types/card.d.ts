@@ -1,3 +1,5 @@
+import { IMember } from "./member";
+
 export interface IBoardCard {
     id: string;
     name: string;
@@ -6,10 +8,7 @@ export interface IBoardCard {
     idMembers: string[];
     pos: number;
     idList: string;
-    members: {
-        fullName: string; id: string;
-        avatarUrl: string;
-    }[];
+    members: IMember[];
     idBoard: string;
     labels: {
         color: string;

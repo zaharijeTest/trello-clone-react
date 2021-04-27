@@ -31,3 +31,7 @@ code {
 .small-font {
   font-size: 12px;
 }
+
+.small-margin {
+  margin: 3px;
+}
