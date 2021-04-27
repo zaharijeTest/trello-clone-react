@@ -13,7 +13,7 @@ export class TrelloService {
     this.getToken();
   }
 
-  /** Please rewrite this part since this.username SET depends on getToken() method */
+  /** DEBUG: Please rewrite this part since this.username SET depends on getToken() method */
   getToken() {
     if(this.token && this.username) {
       return this.token;

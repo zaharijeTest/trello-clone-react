@@ -5,8 +5,9 @@ export interface IBoardCard {
     desc: string;
     idMembers: string[];
     pos: number;
+    idList: string;
     members: {
-        fullName: string;id: string;
+        fullName: string; id: string;
         avatarUrl: string;
     }[];
     idBoard: string;

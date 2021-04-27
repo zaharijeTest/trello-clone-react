@@ -95,12 +95,6 @@
     overflow-y: auto;
   }
   
-  .board-header {
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
   .boards-list {
     display: grid;
     display: flex;
@@ -126,43 +120,6 @@
   
   .main-wrapper {
     background-size: cover;
-  }
-  
-  .lists-wrapper {
-    display: grid;
-    grid-auto-flow: column;
-    overflow-x: auto;
-    height: 90vh;
-    margin: 0 2rem;
-    gap: 1rem;
-  }
-  
-  .list-wrapper {
-    width: 27rem;
-    height: fit-content;
-    max-height: 100%;
-    background-color: var(--light-gray);
-    border-radius: 5px;
-    padding: 0 1rem 1rem;
-  }
-  
-  .list-name {
-    font-size: var(--default-txt);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    margin: 0 0.5rem;
-    /* padding: 20px; */
-    /* background-color: lightgray; */
-    height: 5vh;
-  }
-  
-  .list-content {
-    overflow-y: auto;
-    max-height: 80vh;
-    display: grid;
-    gap: 10px;
-    align-content: flex-start;
   }
   
   .card-wrapper {

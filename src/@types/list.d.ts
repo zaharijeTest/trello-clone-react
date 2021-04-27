@@ -5,4 +5,6 @@ export interface IList {
     idBoard: string;
     pos: number;
     subscribed: boolean;
+    cards: IBoardCard[];
+
 }

@@ -7,7 +7,7 @@ interface IColorChooserProps {
 }
 
 export const ColorChooser: FunctionComponent<IColorChooserProps> = ({ colors, onColorChanged }) => {
-    const [selectedColor, setSelectedColor] = useState<string>();
+    const [selectedColor, setSelectedColor] = useState<string>(colors[0]);
     return (
         <div className="color-chooser-wrapper">
             {colors.map((el, i) =>

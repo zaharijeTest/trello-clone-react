@@ -8,9 +8,10 @@ import { Modal } from "../../shared/components/modal/modal.component";
 import './boards-list.css';
 import { IUser } from "../../@types/user";
 import NewBoard from './components/new-board/new-board';
+import { BoardModel } from "../../models/board.model";
 
 interface IBoardsListStateProps {
-    boards: IBoard[];
+    boards: BoardModel[];
     user: INullable<IUser>;
 }
 
@@ -31,7 +32,7 @@ const BoardsListPage = ({ getBoardsAction, boards, user, selectBoardAction, crea
     const history = useHistory();
     useEffect(() => {
         getBoardsAction();
-    }, [getBoardsAction,user]);
+    }, [getBoardsAction, user]);
 
     return (
         <div className="boards-list">
@@ -39,11 +40,11 @@ const BoardsListPage = ({ getBoardsAction, boards, user, selectBoardAction, crea
                 <div
                     className="board-tile"
                     style={{
-                        background: board.prefs.backgroundImage ? `url(${board.prefs.backgroundImage})` : board.prefs.backgroundColor,
+                        background: board.getBackground()
                     }}
                     key={board.id}
                     onClick={() => {
-                        selectBoardAction(board); 
+                        selectBoardAction(board);
                         goToBoard(history, board);
                     }}
                 >
@@ -54,8 +55,8 @@ const BoardsListPage = ({ getBoardsAction, boards, user, selectBoardAction, crea
                 setModal(true)
             }}>Create New Board</div>
             {modal &&
-                <Modal header="New Board" onCloseClicked={() => setModal(false)}>
-                    <NewBoard user={user} boards={boards} onSubmit={(newBoard) => { createBoardAction(newBoard); setModal(false)}}></NewBoard>
+                <Modal onCloseClicked={() => setModal(false)}>
+                    <NewBoard user={user} boards={boards} onSubmit={(newBoard) => { createBoardAction(newBoard); setModal(false) }}></NewBoard>
                 </Modal>
             }
 

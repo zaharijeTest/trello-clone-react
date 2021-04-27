@@ -1,4 +1,5 @@
-import {IList} from './list';
+import { IBoardCard } from './card';
+import { IList } from './list';
 
 export interface IBoard {
     id: string;
