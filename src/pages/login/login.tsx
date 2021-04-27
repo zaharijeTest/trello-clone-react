@@ -30,7 +30,7 @@ const LoginPage: FunctionComponent<ILoginPageStateProps> = ({ user }) => {
 }
 
 const mapProps: IMapToProps<ILoginPageStateProps> = [
-    (store: IStore) => ({ user: store.user }),
+    (store: IStore) => ({ user: store.userStore.user }),
     {}
 ]
 

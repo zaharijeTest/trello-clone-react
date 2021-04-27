@@ -13,13 +13,12 @@ export class TrelloService {
     this.getToken();
   }
 
+  /** Please rewrite this part since this.username SET depends on getToken() method */
   getToken() {
     if(this.token && this.username) {
-      console.log('From class')
       return this.token;
     }
     const user = this.storageService.get(STORAGE_KEYS.USER);
-    console.log('From storage')
     if (user) {
       this.token = user.token;
       this.username = user.username;
@@ -36,8 +35,9 @@ export class TrelloService {
   }
 
   getBoards() {
+    const token = this.getToken();
     return parseResponse<IBoard[]>(
-      fetch(TRELLO_ENDPOINTS.getBoards(this.username, this.getToken()))
+      fetch(TRELLO_ENDPOINTS.getBoards(this.username, token))
     );
   }
 
@@ -46,6 +46,14 @@ export class TrelloService {
       fetch(TRELLO_ENDPOINTS.getBoardCards(boardId, this.getToken()))
     );
   }
+
+
+  getBoard(boardId) {
+    return parseResponse(
+      fetch(TRELLO_ENDPOINTS.getBoard(boardId, this.getToken()))
+    );
+  }
+
 
   getBoardCard(cardId) {
     return parseResponse(

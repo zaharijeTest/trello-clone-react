@@ -13,6 +13,8 @@ export const TRELLO_ENDPOINTS = {
     `${TRELLO_API_BASE_URL}/boards?${queryParams}&key=${TRELLO_API_KEY}&token=${token}`,
   getBoardCards: (boardId, token) =>
     `${TRELLO_API_BASE_URL}/boards/${boardId}/cards?key=${TRELLO_API_KEY}&token=${token}`,
+  getBoard: (boardId, token) =>
+    `${TRELLO_API_BASE_URL}/boards/${boardId}?key=${TRELLO_API_KEY}&token=${token}`,
   getBoardCard: (cardId, token) =>
     `${TRELLO_API_BASE_URL}/cards/${cardId}?actions=commentCard&fields=all&members=true&key=${TRELLO_API_KEY}&token=${token}`,
   createCard: (queryParams, token) =>

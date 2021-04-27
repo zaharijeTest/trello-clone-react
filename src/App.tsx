@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Footer } from './pages/footer/footer';
 import { Header } from './pages/header/header';
 import { ProtectedRoute } from './shared/components/protected-route/protected-route';
-import { getUser } from './core/store/user/actions';
+import { getUserAction } from './core/store/user/actions';
 import { IUser } from './@types/user';
 import './core/store/store';
 import './App.css';
@@ -20,15 +20,15 @@ interface IAppStateProps {
 }
 
 interface IAppDispatchProps {
-  getUser: IDispatch;
+  getUserAction: IDispatch;
 }
 
 interface IAppProps extends IAppStateProps, IAppDispatchProps{}
 
-const App: FunctionComponent<IAppProps> = ({ getUser, user }) => {
+const App: FunctionComponent<IAppProps> = ({ getUserAction, user }) => {
   useEffect(() => {
-    getUser();
-  }, [getUser]);
+    getUserAction();
+  }, [getUserAction]);
 
   const isAuthenticated = !!user?.id
   return (
@@ -54,8 +54,8 @@ const App: FunctionComponent<IAppProps> = ({ getUser, user }) => {
 }
 
 const mapProps: IMapToProps<IAppStateProps,IAppDispatchProps> = [
-  (store: IStore) => ({user: store.user}),
-  {getUser}
+  (store: IStore) => ({user: store.userStore.user}),
+  {getUserAction}
 ]
 
 export default connect(...mapProps)(App);

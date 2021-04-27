@@ -1,12 +1,18 @@
 import createSagaMiddleware from 'redux-saga';
-import { createStore, applyMiddleware } from 'redux' 
+import { createStore, applyMiddleware, combineReducers } from 'redux' 
 import userSaga from './user/sagas';
-import { reducers } from './reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import boardsSaga from './board/sagas';
+import { userReducers } from './user/reducer';
+import { boardsReducer } from './board/reducer';
 
 const sagaMiddleware = createSagaMiddleware();
-export const store = createStore(reducers, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+
+const combinedReducers = combineReducers({
+    userStore: userReducers,
+    boardsStore: boardsReducer
+})
+export const store = createStore(combinedReducers, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(userSaga);
 sagaMiddleware.run(boardsSaga)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { IBoard } from "../../@types/board";
 import { IDispatch, IMapToProps, INullable, IStore } from "../../@types/store";
-import { getBoards, selectBoard, createBoard } from '../../core/store/board/actions';
+import { getBoardsAction, selectBoardAction, createBoardAction } from '../../core/store/board/actions';
 import { useHistory } from 'react-router-dom';
 import { Modal } from "../../shared/components/modal/modal.component";
 import './boards-list.css';
@@ -15,9 +15,9 @@ interface IBoardsListStateProps {
 }
 
 interface IBoardsListDispatchProps {
-    getBoards: IDispatch;
-    selectBoard: IDispatch;
-    createBoard: IDispatch;
+    getBoardsAction: IDispatch;
+    selectBoardAction: IDispatch;
+    createBoardAction: IDispatch;
 }
 
 interface IBoardListProps extends IBoardsListStateProps, IBoardsListDispatchProps { }
@@ -26,12 +26,12 @@ const goToBoard = (history: any, board: IBoard) => {
     history.push({ pathname: `boards/${board.id}` });
 }
 
-const BoardsListPage = ({ getBoards, boards, user, selectBoard, createBoard }: IBoardListProps) => {
+const BoardsListPage = ({ getBoardsAction, boards, user, selectBoardAction, createBoardAction }: IBoardListProps) => {
     const [modal, setModal] = useState(false);
     const history = useHistory();
     useEffect(() => {
-        getBoards();
-    }, [getBoards,user]);
+        getBoardsAction();
+    }, [getBoardsAction,user]);
 
     return (
         <div className="boards-list">
@@ -43,7 +43,7 @@ const BoardsListPage = ({ getBoards, boards, user, selectBoard, createBoard }: I
                     }}
                     key={board.id}
                     onClick={() => {
-                        selectBoard(board); 
+                        selectBoardAction(board); 
                         goToBoard(history, board);
                     }}
                 >
@@ -55,7 +55,7 @@ const BoardsListPage = ({ getBoards, boards, user, selectBoard, createBoard }: I
             }}>Create New Board</div>
             {modal &&
                 <Modal header="New Board" onCloseClicked={() => setModal(false)}>
-                    <NewBoard user={user} boards={boards} onSubmit={(newBoard) => { createBoard(newBoard); setModal(false)}}></NewBoard>
+                    <NewBoard user={user} boards={boards} onSubmit={(newBoard) => { createBoardAction(newBoard); setModal(false)}}></NewBoard>
                 </Modal>
             }
 
@@ -65,8 +65,8 @@ const BoardsListPage = ({ getBoards, boards, user, selectBoard, createBoard }: I
 
 
 const mapProps: IMapToProps<IBoardsListStateProps, IBoardsListDispatchProps> = [
-    (store: IStore) => ({ boards: store.boards, user: store.user, selectedBoard: store.selectedBoard }),
-    { getBoards, selectBoard, createBoard }
+    (store: IStore) => ({ boards: store.boardsStore.boards, user: store.userStore.user, selectedBoard: store.boardsStore.selectedBoard }),
+    { getBoardsAction, selectBoardAction, createBoardAction }
 ]
 
 

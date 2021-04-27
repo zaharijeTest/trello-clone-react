@@ -1,11 +1,9 @@
-import { IBoard, INewBoard } from "./board";
-import { IUser } from "./user";
+import { IBoardStore } from "../core/store/board/reducer";
+import { IUserStore } from "../core/store/user/reducer";
 
 export interface IStore {
-    user: INullable<IUser>
-    boards: IBoard[]
-    selectedBoard: INullable<IBoard>
-    newBoard: INullable<INewBoard>
+    userStore: IUserStore
+    boardsStore: IBoardStore
 }
 
 export type INullable<T> = T | null | undefined 
