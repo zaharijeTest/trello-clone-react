@@ -12,3 +12,13 @@
   .card-name {
     word-break: break-word;
   }
+
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-more-info {
+    display: flex;
+  }

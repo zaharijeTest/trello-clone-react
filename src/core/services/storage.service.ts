@@ -1,13 +1,15 @@
 export const STORAGE_KEYS = {
   USER: 'user',
-}
+  RECENT_BOARDS: 'recentBoards'
+} as const;
 
 export class StorageService {
-  get(key) {
+  get<T = any>(key): T {
     try {
       const value = localStorage.getItem(key);
       return value ? JSON.parse(value) : null;
     } catch (e) {
+      //@ts-ignore
       return localStorage.getItem(key);
     }
   }

@@ -11,6 +11,8 @@ import { IUser } from './@types/user';
 import './core/store/store';
 import './App.css';
 import './index.css';
+import './icons.css';
+
 import { IDispatch, IMapToProps, INullable, IStore } from './@types/store';
 import { ROUTES } from './core/routes';
 import { NotFound } from './pages/not-found/not-found';

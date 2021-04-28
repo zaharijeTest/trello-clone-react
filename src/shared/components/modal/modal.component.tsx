@@ -6,7 +6,7 @@ interface IModalProps {
     onCloseClicked: (val) => any;
 }
 
-export const Modal: FunctionComponent<IModalProps> = ({ onCloseClicked, children, header}) => {
+export const Modal: FunctionComponent<IModalProps> = ({ onCloseClicked, children, header }) => {
 
     return (
         <div className="modal-wrapper">

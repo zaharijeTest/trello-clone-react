@@ -16,11 +16,25 @@ export interface IBoardCard {
         idBoard: string;
         name: string;
     }[];
-    actions: {
-        date: Date;
-        type: 'commentCard',
-        data: {
-            text: string;
-        }
-    }[]
+    actions: IActivity[]
+}
+
+export interface IActivity {
+    date: Date;
+    type: 'commentCard',
+    data: {
+        text: string;
+    }
+    memberCreator: {
+        activityBlocked: boolean
+        avatarHash: string
+        avatarUrl: string
+        fullName: string
+        id: string
+        idMemberReferrer: string
+        initials: string
+        nonPublic: {}
+        nonPublicAvailable: boolean
+        username: string
+    }
 }

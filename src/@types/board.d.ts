@@ -1,5 +1,6 @@
 import { IBoardCard } from './card';
 import { IList } from './list';
+import { IMember } from './member';
 
 export interface IBoard {
     id: string;
@@ -13,6 +14,7 @@ export interface IBoard {
         backgroundColor: string;
         backgroundImage: string;
     }
+    members: IMember[]
 }
 
 export interface INewBoard {

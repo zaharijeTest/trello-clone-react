@@ -13,8 +13,8 @@ export const MenuList: FunctionComponent<IMenuListProps> = ({ onSelectionChanged
     const [selectedItem, setSelectedItem] = useState<IMenuListItem>();
     return (
         <div className="menu-list-wrapper">
-            {items.map(item => (
-                <div className={`menu-list-item-wrapper ${item === selectedItem ? "menu-list-selected-item" : ''}`} onClick={() => {
+            {items.map((item, index) => (
+                <div key={index} className={`menu-list-item-wrapper ${item === selectedItem ? "menu-list-selected-item" : ''}`} onClick={() => {
                     setSelectedItem(item);
                     onSelectionChanged(item);
                 }}>
