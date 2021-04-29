@@ -1,163 +1,162 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-  }
-  
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: blue orange;
-  }
-  
-  /* Works on Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 0.8rem;
-    height: 1rem;
-  }
-  
-  *::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    background-color: rgba(128, 128, 128, 0.7);
-    border-radius: 20px;
-  }
-  
-  :root {
-    font-size: 10px;
-    --radius: 0.3rem;
-    --btn-cl: rgba(255, 255, 255, 0.2);
-    --btn-hover-cl: rgba(255, 255, 255, 0.32);
-    --light-gray: #ebecf0;
-    --default-txt: 1.4rem;
-  }
-  
-  .button-wrapper {
-    border-radius: var(--radius);
-    border: none;
-    padding: 0 1.2rem;
-    height: 3.2rem;
-    width: fit-content;
-    cursor: pointer;
-    background-color: var(--btn-cl);
-  }
-  
-  .button-wrapper:hover {
-    background-color: var(--btn-hover-cl);
-  }
-  
-  .button-text {
-    font-size: var(--default-txt);
-    line-height: 3.2rem;
-    color: #fff;
-  }
-  
-  body {
-    background-color: #f4f5f7;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  main {
-    height: 95vh;
-    overflow-y: auto;
-  }
-  
-  .boards-list {
-    display: grid;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 2rem;
-    background-color: #f4f5f7;
-  }
-  
-  .board-tile {
-    width: 19rem;
-    height: 9.6rem;
-    background-size: cover;
-    cursor: pointer;
-    color: #fff;
-    padding: 0.8rem;
-    font-size: 1.6rem;
-    font-weight: 700;
-    overflow-y: auto;
-    word-break: break-word;
-    border-radius: var(--radius);
-  }
-  
-  .main-wrapper {
-    background-size: cover;
-  }
-  
-  .card-wrapper {
-    background-color: #fff;
-    color: #172b4d;
-    padding: 1rem;
-    font-size: var(--default-txt);
-    box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
-    border-radius: var(--radius);
-    cursor: pointer;
-  }
-  
-  .card-name {
-    word-break: break-word;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+}
 
-  
-  .floating-list-wrapper {
-    background-color: red;
-    position: absolute;
-    top: 500px;
-    left: 300px;
-  }
-  
-  .list-new-card {
-    cursor: pointer;
-    font-size: 15px;
-    padding: 5px;
-  }
-  
-  .list-new-card:hover {
-    opacity: 0.3;
-  }
-  .authentication-wrapper {
-    height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #0079bf;
-  }
-  
-  .authentication-info {
-    background-color: white;
-    box-shadow: 3px 3px rgb(9 30 66 / 25%);;
-    height: 200px;
-    width: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    flex-direction: column;
-    font-size: 15px;
-  }
-  
-  .authentication-info p {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .modal-content {
-    height: 100%;
-    overflow-y: auto;
-  }
-  
-  button:focus {
-    outline: none;
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.7);
+  border-radius: 20px;
+}
+
+:root {
+  font-size: 10px;
+  --radius: 0.3rem;
+  --btn-cl: rgba(255, 255, 255, 0.2);
+  --btn-hover-cl: rgba(255, 255, 255, 0.32);
+  --light-gray: #ebecf0;
+  --default-txt: 1.4rem;
+}
+
+.button-wrapper {
+  border-radius: var(--radius);
+  border: none;
+  padding: 0 1.2rem;
+  height: 3.2rem;
+  width: fit-content;
+  cursor: pointer;
+  background-color: var(--btn-cl);
+}
+
+.button-wrapper:hover {
+  background-color: var(--btn-hover-cl);
+}
+
+.button-text {
+  font-size: var(--default-txt);
+  line-height: 3.2rem;
+  color: #fff;
+}
+
+body {
+  background-color: #f4f5f7;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  height: 95vh;
+  overflow-y: auto;
+}
+
+.boards-list {
+  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f4f5f7;
+}
+
+.board-tile {
+  width: 19rem;
+  height: 9.6rem;
+  background-size: cover;
+  cursor: pointer;
+  color: #fff;
+  padding: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  overflow-y: auto;
+  word-break: break-word;
+  border-radius: var(--radius);
+}
+
+.main-wrapper {
+  background-size: cover;
+}
+
+.card-wrapper {
+  background-color: #fff;
+  color: #172b4d;
+  padding: 1rem;
+  font-size: var(--default-txt);
+  box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.card-name {
+  word-break: break-word;
+}
+
+.floating-list-wrapper {
+  background-color: red;
+  position: absolute;
+  top: 500px;
+  left: 300px;
+}
+
+.list-new-card {
+  cursor: pointer;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.list-new-card:hover {
+  opacity: 0.3;
+}
+.authentication-wrapper {
+  height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0079bf;
+}
+
+.authentication-info {
+  background-color: white;
+  box-shadow: 3px 3px rgb(9 30 66 / 25%);
+  height: 200px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+.authentication-info p {
+  text-align: center;
+  padding: 20px;
+}
+
+.modal-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+button:focus {
+  outline: none;
+}

@@ -1,27 +1,27 @@
 .menu-list-wrapper {
-    padding: 20px;
+  padding: 20px;
 }
 
 .menu-list-item-wrapper {
-    display: flex;
-    gap: 10px;
-    margin: 10px;
-    cursor: pointer;
-    padding: 5px;
+  display: flex;
+  gap: 10px;
+  margin: 10px;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .menu-list-item-wrapper:hover {
-    background: rgba(9,30,66,.08);
+  background: rgba(9, 30, 66, 0.08);
 }
 
 .menu-list-text {
-    color: #172b4d;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 20px;
+  color: #172b4d;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
 }
 
 .menu-list-selected-item {
-    background-color: #e4f0f6;
-    color: #0079bf;
+  background-color: #e4f0f6;
+  color: #0079bf;
 }

@@ -1,6 +1,6 @@
 export const STORAGE_KEYS = {
-  USER: 'user',
-  RECENT_BOARDS: 'recentBoards'
+  USER: "user",
+  RECENT_BOARDS: "recentBoards",
 } as const;
 
 export class StorageService {
@@ -9,7 +9,7 @@ export class StorageService {
       const value = localStorage.getItem(key);
       return value ? JSON.parse(value) : null;
     } catch (e) {
-      //@ts-ignore
+      // @ts-ignore
       return localStorage.getItem(key);
     }
   }

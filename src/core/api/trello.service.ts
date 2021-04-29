@@ -41,7 +41,7 @@ export class TrelloService {
     const token = this.getToken();
     return parseResponse<IBoard[]>(
       fetch(TRELLO_ENDPOINTS.getBoards(this.username, token))
-    ).then(boards => boards.map(board => new BoardModel(board)));
+    ).then((boards) => boards.map((board) => new BoardModel(board)));
   }
 
   getBoardCards(boardId: string) {
@@ -49,7 +49,6 @@ export class TrelloService {
       fetch(TRELLO_ENDPOINTS.getBoardCards(boardId, this.getToken()))
     );
   }
-
 
   async getBoard(boardId: string) {
     const boardPromise = parseResponse<IBoard>(
@@ -60,11 +59,10 @@ export class TrelloService {
     return new BoardModel(board, cards);
   }
 
-
   getBoardCard(cardId) {
     return parseResponse<IBoardCard>(
       fetch(TRELLO_ENDPOINTS.getBoardCard(cardId, this.getToken()))
-    ).then(res => new CardModel(res));
+    ).then((res) => new CardModel(res));
   }
 
   generateAvatarUrl(url, size = 30) {
@@ -100,9 +98,12 @@ export class TrelloService {
 
   createComment(cardId, commentText) {
     return parseResponse(
-      fetch(TRELLO_ENDPOINTS.createComment(cardId, commentText, this.getToken()), {
-        method: "POST",
-      })
+      fetch(
+        TRELLO_ENDPOINTS.createComment(cardId, commentText, this.getToken()),
+        {
+          method: "POST",
+        }
+      )
     );
   }
 }

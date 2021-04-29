@@ -1,6 +1,6 @@
 import { APP_CONFIG } from "../../config/constants";
 
-const { TRELLO_API_BASE_URL, TRELLO_API_KEY, BASE_URL, } = APP_CONFIG;
+const { TRELLO_API_BASE_URL, TRELLO_API_KEY, BASE_URL } = APP_CONFIG;
 
 export const TRELLO_ENDPOINTS = {
   authorize: () =>

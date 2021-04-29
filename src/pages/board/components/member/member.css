@@ -1,13 +1,12 @@
-  
-  .member-avatar {
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: flex;
-    justify-content: center;
-    color: #5e6c84;
-    background-color: rgba(9, 30, 66, 0.04);
-    font-size: 2rem;
-    cursor: pointer;
-  }
+.member-avatar {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  color: #5e6c84;
+  background-color: rgba(9, 30, 66, 0.04);
+  font-size: 2rem;
+  cursor: pointer;
+}

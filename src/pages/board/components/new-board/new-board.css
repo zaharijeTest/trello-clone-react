@@ -1,21 +1,21 @@
 .new-board-wrapper {
-    width: 400px;
+  width: 400px;
 }
 
 .new-board-title-wrapper {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .color-chooser-wrapper {
-    width: 90px;
+  width: 90px;
 }
 
 .new-board-info-wrapper {
-    margin: 10px 0px;
-    background-color: #6c547b;
-    padding: 10px;
+  margin: 10px 0px;
+  background-color: #6c547b;
+  padding: 10px;
 }
 
 .new-board-info-additional {
-    color: #8fdfeb;
+  color: #8fdfeb;
 }

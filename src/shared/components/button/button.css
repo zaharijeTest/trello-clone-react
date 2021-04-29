@@ -1,24 +1,23 @@
-
 .button-wrapper {
-    border-radius: var(--radius);
-    border: none;
-    padding: 0 1.2rem;
-    height: 3.2rem;
-    width: fit-content;
-    cursor: pointer;
-    background-color: var(--btn-cl);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .button-wrapper:hover {
-    background-color: var(--btn-hover-cl);
-  }
-  
-  .button-text {
-    font-size: var(--default-txt);
-    line-height: 3.2rem;
-    color: #fff;
-  }
+  border-radius: var(--radius);
+  border: none;
+  padding: 0 1.2rem;
+  height: 3.2rem;
+  width: fit-content;
+  cursor: pointer;
+  background-color: var(--btn-cl);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-wrapper:hover {
+  background-color: var(--btn-hover-cl);
+}
+
+.button-text {
+  font-size: var(--default-txt);
+  line-height: 3.2rem;
+  color: #fff;
+}

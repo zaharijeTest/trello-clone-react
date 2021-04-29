@@ -2,8 +2,8 @@ import { BaseComponent } from "../../../core/components/base.component";
 import htmlContent from "./floating-list.component.html";
 
 export class FloatingListComponent extends BaseComponent {
-  constructor({ container, props = {}, }) {
-    super({ container, htmlContent, });
+  constructor({ container, props = {} }) {
+    super({ container, htmlContent });
     this.title = props.title || "";
     this.elements = props.elements;
     this.name = new Date().getTime();
@@ -16,10 +16,11 @@ export class FloatingListComponent extends BaseComponent {
     document.body.appendChild(this.container);
   }
 
-  closeHandler (e) {
+  closeHandler(e) {
     if (
-      !e.target.classList.contains('list-opener') &&  (e.target !== this.container &&
-      !e.target.closest(".floating-list-wrapper"))
+      !e.target.classList.contains("list-opener") &&
+      e.target !== this.container &&
+      !e.target.closest(".floating-list-wrapper")
     ) {
       this.hide();
     }

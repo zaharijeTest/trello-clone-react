@@ -9,7 +9,7 @@ export class AuthenticationService {
     this.storageService = new StorageService();
     this.trelloService = new TrelloService();
   }
-  
+
   login() {
     this.trelloService.authorize();
   }
@@ -42,13 +42,15 @@ export class AuthenticationService {
 
   async saveUser(token) {
     try {
-      const {username, id, fullName, } = await this.trelloService.getUserInfo(token);
+      const { username, id, fullName } = await this.trelloService.getUserInfo(
+        token
+      );
       const newUser = {
         username,
         id,
         token,
         fullName,
-      }
+      };
       this.storageService.set(STORAGE_KEYS.USER, newUser);
       return newUser;
     } catch (e) {
