@@ -11,4 +11,5 @@ export const COLORS = {
   BLACK: "#344563",
   LIME: "#51e898",
   BLUE: "#0079bf",
+  LIGHT_GRAY: "rgba(9,30,66,.04)",
 };

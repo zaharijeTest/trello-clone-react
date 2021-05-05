@@ -2,7 +2,13 @@
   background-color: #f4f5f7;
   padding: 20px;
   width: 60vw;
-  height: 80vh;
+  min-height: 80vh;
+}
+
+.card-details-content {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin: 3rem 1rem 1rem;
 }
 
 .card-details-header {
@@ -24,7 +30,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  margin: 3rem 1rem 1rem;
 }
 
 .card-details-labels {
@@ -80,4 +85,8 @@
 
 .card-details-activity-date {
   color: #5e6c84;
+}
+
+.card-details-command-group {
+  margin-bottom: 20px;
 }

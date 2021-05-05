@@ -1,5 +1,5 @@
 import { IBoard, INewBoard } from "../../@types/board";
-import { IBoardCard } from "../../@types/card";
+import { IActivity, IBoardCard } from "../../@types/card";
 import { BoardModel } from "../../models/board.model";
 import { CardModel } from "../../models/card.model";
 import { createQueryParams, parseResponse } from "../../utils/api.util";
@@ -97,7 +97,7 @@ export class TrelloService {
   }
 
   createComment(cardId, commentText) {
-    return parseResponse(
+    return parseResponse<IActivity>(
       fetch(
         TRELLO_ENDPOINTS.createComment(cardId, commentText, this.getToken()),
         {

@@ -1,3 +1,4 @@
+import { IUser } from "../../@types/user";
 import { TrelloService } from "../api/trello.service";
 import { StorageService, STORAGE_KEYS } from "./storage.service";
 
@@ -42,14 +43,18 @@ export class AuthenticationService {
 
   async saveUser(token) {
     try {
-      const { username, id, fullName } = await this.trelloService.getUserInfo(
-        token
-      );
-      const newUser = {
+      const {
+        username,
+        id,
+        fullName,
+        avatarUrl,
+      } = await this.trelloService.getUserInfo(token);
+      const newUser: IUser = {
         username,
         id,
         token,
         fullName,
+        avatarUrl,
       };
       this.storageService.set(STORAGE_KEYS.USER, newUser);
       return newUser;

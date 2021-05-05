@@ -3,4 +3,5 @@ export interface IUser {
   id: string;
   fullName: string;
   token: string;
+  avatarUrl: string;
 }

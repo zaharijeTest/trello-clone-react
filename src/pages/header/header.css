@@ -31,3 +31,7 @@ header span {
 .header-app-icon {
   height: 35px;
 }
+
+.header-profile-wrapper span {
+  font-size: 15px;
+}

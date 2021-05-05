@@ -6,9 +6,12 @@ import { ReactComponent as MenuLogo } from "../../assets/icons/menu.icon.svg";
 import { ReactComponent as BoardLogo } from "../../assets/icons/board.icon.svg";
 import { useHistory } from "react-router";
 import "./header.css";
+import { useContext } from "react";
+import { UserContext } from "../../context/user.context";
 
 export const Header = () => {
   const history = useHistory();
+  const user = useContext(UserContext);
   return (
     <header>
       <div className="header-control-wrapper">
@@ -26,7 +29,9 @@ export const Header = () => {
       </div>
       <span>Trello </span>
       <AppLogo className="app-logo" />
-      <div className="header-profile-wrapper" />
+      <div className="header-profile-wrapper">
+        <span>{user?.fullName}</span>
+      </div>
     </header>
   );
 };

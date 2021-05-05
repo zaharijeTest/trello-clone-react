@@ -152,11 +152,36 @@ main {
   padding: 20px;
 }
 
-.modal-content {
-  height: 100%;
-  overflow-y: auto;
-}
-
 button:focus {
   outline: none;
+}
+
+.button-link {
+  background-color: rgba(9, 30, 66, 0.04);
+  box-shadow: none;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  height: 32px;
+  margin-top: 8px;
+  max-width: 300px;
+  overflow: hidden;
+  padding: 6px 12px;
+  position: relative;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: 85ms;
+  transition-timing-function: ease;
+}
+
+.button-link:hover {
+  background-color: rgba(9, 30, 66, 0.08);
+  box-shadow: none;
+  border: none;
 }

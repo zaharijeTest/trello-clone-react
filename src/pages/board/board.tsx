@@ -10,9 +10,9 @@ import { Member } from "./components/member/member";
 import { Modal } from "../../shared/components/modal/modal.component";
 import { CardDetails } from "./components/card-details/card-details";
 import { TrelloService } from "../../core/api/trello.service";
-import { CardModel } from "../../models/card.model";
 import "./board.css";
 import { IBoardCard } from "../../@types/card";
+import { Loader } from "../../shared/components/loader/loader";
 
 interface IBoardStateProps {
   board: INullable<BoardModel>;
@@ -28,10 +28,12 @@ const trelloService = new TrelloService();
 
 const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
   const { boardId } = useParams<{ boardId: string }>();
+  const [loading, setLoading] = useState(false);
+
   const [{ selectedCard, modal }, setState] = useState<{
     selectedCard?: IBoardCard | null;
     modal?: boolean;
-  }>({});
+  }>({ modal: false });
 
   useEffect(() => {
     getBoardAction(boardId);
@@ -39,18 +41,17 @@ const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
 
   useEffect(() => {
     if (selectedCard && !modal) {
-      trelloService.getBoardCard(selectedCard.id).then((r) => {
-        const existingCard = board?.lists
-          .find((l) => l.id === selectedCard.idList)
-          ?.cards.find((c) => c.id === selectedCard.id) as IBoardCard;
-        Object.assign(existingCard, r);
-
-        setState((state) => ({
-          ...state,
-          selectedCard: existingCard,
-          modal: true,
-        }));
-      });
+      setLoading(true);
+      trelloService
+        .getBoardCard(selectedCard.id)
+        .then((r) => {
+          Object.assign(selectedCard, r);
+          setState((state) => ({
+            ...state,
+            modal: true,
+          }));
+        })
+        .finally(() => setLoading(false));
     }
   }, [selectedCard, modal]);
 
@@ -77,28 +78,30 @@ const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
           ))}
         </div>
       </div>
-      <div className="lists-wrapper">
-        {board?.lists &&
-          board.lists.map((boardList) => (
-            <div key={boardList.id} className="list-wrapper">
-              <div className="list-name">{boardList.name}</div>
-              <div className="list-content">
-                {boardList.cards.map((card) => (
-                  <CardTile
-                    key={card.id}
-                    card={card}
-                    onClicked={() =>
-                      setState((state) => ({
-                        ...state,
-                        selectedCard: card,
-                      }))
-                    }
-                  />
-                ))}
+      <Loader loading={loading}>
+        <div className="lists-wrapper">
+          {board?.lists &&
+            board.lists.map((boardList) => (
+              <div key={boardList.id} className="list-wrapper">
+                <div className="list-name">{boardList.name}</div>
+                <div className="list-content">
+                  {boardList.cards.map((card) => (
+                    <CardTile
+                      key={card.id}
+                      card={card}
+                      onClicked={() =>
+                        setState((state) => ({
+                          ...state,
+                          selectedCard: card,
+                        }))
+                      }
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+      </Loader>
       {modal && selectedCard && (
         <Modal
           onCloseClicked={() => {

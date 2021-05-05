@@ -14,6 +14,7 @@ import "./icons.css";
 import { IDispatch, IMapToProps, INullable, IStore } from "./@types/store";
 import { ROUTES } from "./core/routes";
 import { NotFound } from "./pages/not-found/not-found";
+import { UserContext } from "./context/user.context";
 
 interface IAppStateProps {
   user: INullable<IUser>;
@@ -35,30 +36,32 @@ const App: FunctionComponent<IAppProps> = ({ getUserAction, user }) => {
     <div className="container">
       {user !== undefined && (
         <Router>
-          <Header />
-          <Switch>
-            {ROUTES.map((route, index) => {
-              if (route.protected) {
+          <UserContext.Provider value={user}>
+            <Header />
+            <Switch>
+              {ROUTES.map((route, index) => {
+                if (route.protected) {
+                  return (
+                    <ProtectedRoute
+                      isAuthenticated={isAuthenticated}
+                      path={route.path}
+                      component={route.component}
+                      key={index}
+                    />
+                  );
+                }
                 return (
-                  <ProtectedRoute
-                    isAuthenticated={isAuthenticated}
+                  <Route
+                    exact={true}
                     path={route.path}
                     component={route.component}
                     key={index}
                   />
                 );
-              }
-              return (
-                <Route
-                  exact={true}
-                  path={route.path}
-                  component={route.component}
-                  key={index}
-                />
-              );
-            })}
-            <Route exact={true} component={NotFound} />
-          </Switch>
+              })}
+              <Route exact={true} component={NotFound} />
+            </Switch>
+          </UserContext.Provider>
         </Router>
       )}
       <Footer />

@@ -1,4 +1,12 @@
-import { CSSProperties, FunctionComponent, useState } from "react";
+import React, {
+  CSSProperties,
+  FunctionComponent,
+  MutableRefObject,
+  useEffect,
+  useState,
+} from "react";
+import TextareaAutosize from "react-textarea-autosize";
+
 import "./input.css";
 
 interface IInputProps {
@@ -6,34 +14,52 @@ interface IInputProps {
   placeholder?: string;
   style?: CSSProperties;
   onChanged?: (newValue: string) => any;
+  onFocused?: (focused: boolean) => any;
+  onInput?: (key: string) => any;
   value?: string;
+  multiline?: boolean;
 }
 
 export const Input: FunctionComponent<IInputProps> = ({
   label,
   placeholder,
   style,
-  onChanged,
+  onChanged = () => {},
+  onFocused = () => {},
+  onInput = () => {},
   value,
+  multiline = false,
 }) => {
-  const [controlledValue, setValue] = useState(value);
+  const [controlledValue, setValue] = useState(value || "");
 
   const handleChange = (newValue) => {
     setValue(newValue);
+    onInput(newValue);
   };
+
+  useEffect(() => {
+    if (value !== controlledValue) {
+      setValue(value || "");
+    }
+  }, [value]);
+
   return (
     <div className="input-wrapper">
       <label>{label}</label>
-      <input
-        className="input-text"
+      <TextareaAutosize
+        className={`input-text`}
         placeholder={placeholder}
+        // @ts-ignore
         style={style}
         onChange={(e) => handleChange(e.currentTarget.value)}
-        onBlur={(e) =>
-          onChanged && e.currentTarget.value !== value
-            ? onChanged(e.currentTarget.value)
-            : null
-        }
+        onKeyDown={(e) => !multiline && e.key === "Enter" && e.preventDefault()}
+        onBlur={(e) => {
+          if (e.currentTarget.value !== value) {
+            onChanged(e.currentTarget.value);
+          }
+          onFocused(false);
+        }}
+        onFocus={() => onFocused(true)}
         value={controlledValue}
       />
     </div>

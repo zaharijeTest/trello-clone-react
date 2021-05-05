@@ -29,3 +29,8 @@
   padding: 10px;
   word-break: break-word;
 }
+
+.card-details-activity-info {
+  display: flex;
+  gap: 10px;
+}
