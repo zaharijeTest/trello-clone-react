@@ -36,7 +36,7 @@ const NewBoard: FunctionComponent<INewBoardProps> = ({
           <Input
             style={{ color: "white" }}
             placeholder="Board Name"
-            onChanged={(e) => setBoard({ ...board, name: e.target.value })}
+            onChanged={(newValue) => setBoard({ ...board, name: newValue })}
           />
           <span className="white-text">{user?.fullName}'s workspace</span>
         </div>

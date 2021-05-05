@@ -12,6 +12,7 @@ import { CardDetails } from "./components/card-details/card-details";
 import { TrelloService } from "../../core/api/trello.service";
 import { CardModel } from "../../models/card.model";
 import "./board.css";
+import { IBoardCard } from "../../@types/card";
 
 interface IBoardStateProps {
   board: INullable<BoardModel>;
@@ -27,22 +28,35 @@ const trelloService = new TrelloService();
 
 const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
   const { boardId } = useParams<{ boardId: string }>();
-  const [modal, showModal] = useState(false);
-  const [selectedCardId, setSelectedCardId] = useState<string>();
-  const [selectedCard, setSelectedCard] = useState<CardModel>();
+  const [{ selectedCard, modal }, setState] = useState<{
+    selectedCard?: IBoardCard | null;
+    modal?: boolean;
+  }>({});
 
   useEffect(() => {
     getBoardAction(boardId);
   }, [getBoardAction, boardId]);
 
   useEffect(() => {
-    if (selectedCardId) {
-      trelloService.getBoardCard(selectedCardId).then((r) => {
-        setSelectedCard(r);
-        showModal(true);
+    if (selectedCard && !modal) {
+      trelloService.getBoardCard(selectedCard.id).then((r) => {
+        const existingCard = board?.lists
+          .find((l) => l.id === selectedCard.idList)
+          ?.cards.find((c) => c.id === selectedCard.id) as IBoardCard;
+        Object.assign(existingCard, r);
+
+        setState((state) => ({
+          ...state,
+          selectedCard: existingCard,
+          modal: true,
+        }));
       });
     }
-  }, [selectedCardId]);
+  }, [selectedCard, modal]);
+
+  const handleModalClose = () => {
+    setState((state) => ({ ...state, modal: false, selectedCard: null }));
+  };
 
   return (
     <div style={{ background: board?.getBackground() }}>
@@ -73,15 +87,24 @@ const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
                   <CardTile
                     key={card.id}
                     card={card}
-                    onClicked={() => setSelectedCardId(card.id)}
+                    onClicked={() =>
+                      setState((state) => ({
+                        ...state,
+                        selectedCard: card,
+                      }))
+                    }
                   />
                 ))}
               </div>
             </div>
           ))}
       </div>
-      {modal && (
-        <Modal onCloseClicked={() => showModal(false)}>
+      {modal && selectedCard && (
+        <Modal
+          onCloseClicked={() => {
+            handleModalClose();
+          }}
+        >
           <CardDetails card={selectedCard} />
         </Modal>
       )}
