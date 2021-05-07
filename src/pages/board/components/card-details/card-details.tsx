@@ -5,10 +5,16 @@ import { COLORS } from "../../../../config/colors";
 import { TrelloService } from "../../../../core/api/trello.service";
 import { Button } from "../../../../shared/components/button/button";
 import { Input } from "../../../../shared/components/input/input.component";
-import { MenuList } from "../../../../shared/components/menu-list/menu-list";
 import { Activity } from "../activity/activity";
 import { Member } from "../member/member";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./card-details.css";
+import {
+  faAlignLeft,
+  faIdCard,
+  faList,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface ICardDetailsProps {
   card: IBoardCard;
@@ -21,7 +27,7 @@ export const CardDetails: FunctionComponent<ICardDetailsProps> = ({
   card,
   list,
 }) => {
-  const [cardUpdated, setCardUpdated] = useState(card);
+  const [, setCardUpdated] = useState(card);
 
   const updateCardTitle = (newCardName) => {
     trelloService.updateCard(card?.id, { name: newCardName }).then((r) => {
@@ -31,24 +37,26 @@ export const CardDetails: FunctionComponent<ICardDetailsProps> = ({
 
   const createComment = (message: string) => {
     trelloService.createComment(card.id, message).then((r) => {
-      card.actions.push(r);
+      card.actions.unshift(r);
       setCardUpdated((cardUpdated) => ({ ...cardUpdated }));
     });
     setCardUpdated((cardUpdated) => ({ ...cardUpdated }));
   };
   return (
     <div className="card-details-wrapper">
-      <div className="card-details-header">
-        <div className="card-details-title" />
-        <Input
-          value={card.name}
-          style={{ color: "black" }}
-          onChanged={(value) => updateCardTitle(value)}
-        />
-        <span> in list </span> <span>{list?.name}</span>
+      <div className="card-details-header flex flex-gap-10">
+        <FontAwesomeIcon icon={faIdCard} className="icon-normal" />
+        <div className="card-details-title">
+          <Input
+            value={card.name}
+            style={{ color: "black", fontWeight: 600, fontSize: "20px" }}
+            onChanged={(value) => updateCardTitle(value)}
+          />
+          <span> in list </span> <span>{list?.name}</span>
+        </div>
       </div>
       <div className="card-details-content">
-        <div>
+        <div className="card-details-info-wrapper">
           <div className="card-details-meta">
             <div>
               <span className="card-details-members-title">MEMBERS</span>
@@ -76,14 +84,22 @@ export const CardDetails: FunctionComponent<ICardDetailsProps> = ({
             </div>
           </div>
           <div className="card-details-description-wrapper">
-            <span className="card-details-description-title">Description </span>
+            <div className="display-center flex-gap-10">
+              <FontAwesomeIcon icon={faAlignLeft} className="icon-normal" />
+              <span className="card-details-description-title">
+                Description{" "}
+              </span>
+            </div>
             <div className="card-details-description">{card.desc}</div>
           </div>
           <div className="card-details-activity-wrapper">
-            <span className="card-details-activity-title">Activity</span>
+            <div className="display-center flex-gap-10">
+              <FontAwesomeIcon icon={faList} className="icon-normal" />
+              <span className="card-details-activity-title">Activity</span>
+            </div>
             <div className="card-details-activity">
               <Activity isNew={true} onSaveClicked={createComment} />
-              {card?.actions.map((action, index) => (
+              {card.actions?.map((action, index) => (
                 <Activity key={index} activity={action} />
               ))}
             </div>
@@ -93,24 +109,24 @@ export const CardDetails: FunctionComponent<ICardDetailsProps> = ({
           <div>
             <span className="card-details-members-title">ADD TO CARD</span>
             <div className="card-details-command-group">
-              <a className="button-link">
+              <span className="button-link">
                 <span>Members</span>
-              </a>
-              <a className="button-link">
+              </span>
+              <span className="button-link">
                 <span>Labels</span>
-              </a>
-              <a className="button-link">
+              </span>
+              <span className="button-link">
                 <span>Checklist</span>
-              </a>
-              <a className="button-link">
+              </span>
+              <span className="button-link">
                 <span>Due date</span>
-              </a>
-              <a className="button-link">
+              </span>
+              <span className="button-link">
                 <span>Attachment</span>
-              </a>
-              <a className="button-link">
+              </span>
+              <span className="button-link">
                 <span>Cover</span>
-              </a>
+              </span>
             </div>
           </div>
           <div>

@@ -185,3 +185,17 @@ button:focus {
   box-shadow: none;
   border: none;
 }
+
+.display-center {
+  display: flex;
+  align-items: center;
+}
+
+.icon-normal {
+  height: 20px !important;
+  width: 32px !important;
+}
+
+.flex-gap-10 {
+  gap: 10px;
+}

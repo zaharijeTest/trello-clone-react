@@ -1,7 +1,6 @@
 import React, {
   CSSProperties,
   FunctionComponent,
-  MutableRefObject,
   useEffect,
   useState,
 } from "react";
@@ -47,7 +46,7 @@ export const Input: FunctionComponent<IInputProps> = ({
     <div className="input-wrapper">
       <label>{label}</label>
       <TextareaAutosize
-        className={`input-text`}
+        className={`input-text ${!multiline ? "input-single-line" : ""}`}
         placeholder={placeholder}
         // @ts-ignore
         style={style}

@@ -2,6 +2,7 @@
   display: grid;
   margin: 15px;
   grid-template-columns: 1fr 20fr;
+  align-items: center;
 }
 
 .card-details-activity-wrapper {
@@ -16,11 +17,11 @@
 }
 
 .card-details-activity-meta {
-  margin-left: 10px;
 }
 
 .card-details-activity-comment {
   background-color: #fff;
+  display: inline-block;
   border-radius: 3px;
   box-shadow: 0 1px 2px -1px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
   box-sizing: border-box;

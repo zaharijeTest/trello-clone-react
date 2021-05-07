@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
 import { IDispatch, IMapToProps, INullable, IStore } from "../../@types/store";
 import { getBoardAction } from "../../core/store/board/actions";
 import { BoardModel } from "../../models/board.model";
@@ -29,6 +29,8 @@ const trelloService = new TrelloService();
 const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
   const { boardId } = useParams<{ boardId: string }>();
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
 
   const [{ selectedCard, modal }, setState] = useState<{
     selectedCard?: IBoardCard | null;
@@ -40,12 +42,29 @@ const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
   }, [getBoardAction, boardId]);
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const selectedCardId = searchParams.get("selectedCard");
+    if (selectedCardId) {
+      board?.lists?.forEach((list) =>
+        list.cards.forEach((card) => {
+          if (card.id === selectedCardId) {
+            setState((state) => ({ ...state, selectedCard: card }));
+          }
+        })
+      );
+    } else {
+      setState((state) => ({ ...state, modal: false, selectedCard: null }));
+    }
+  }, [board, location]);
+
+  useEffect(() => {
     if (selectedCard && !modal) {
       setLoading(true);
       trelloService
         .getBoardCard(selectedCard.id)
         .then((r) => {
           Object.assign(selectedCard, r);
+          setSelectedCardQueryParam(selectedCard.id);
           setState((state) => ({
             ...state,
             modal: true,
@@ -56,7 +75,14 @@ const Board: FunctionComponent<IBoardProps> = ({ board, getBoardAction }) => {
   }, [selectedCard, modal]);
 
   const handleModalClose = () => {
+    history.push({});
     setState((state) => ({ ...state, modal: false, selectedCard: null }));
+  };
+
+  const setSelectedCardQueryParam = (selectedCardId: string) => {
+    const params = new URLSearchParams();
+    params.append("selectedCard", selectedCardId);
+    history.push({ search: params.toString() });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useRef, useState } from "react";
+import React, { FunctionComponent, useContext, useState } from "react";
 import { IActivity } from "../../../../@types/card";
 import { UserContext } from "../../../../context/user.context";
 import { Button } from "../../../../shared/components/button/button";
@@ -48,7 +48,10 @@ export const Activity: FunctionComponent<IActivityProps> = ({
         <div className="card-details-activity-member-wrapper">
           <Member member={user} />
           <div className="card-details-activity-meta">
-            <div className="card-details-activity-comment">
+            <div
+              className="card-details-activity-comment"
+              style={{ display: "inherit" }}
+            >
               <Input
                 style={{ color: "black", cursor: "pointer" }}
                 multiline={true}
